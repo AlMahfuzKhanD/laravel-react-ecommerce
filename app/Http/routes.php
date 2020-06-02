@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
 
 	
-});
+// });
 
 
 // Route::get('/about', function () {
@@ -44,13 +44,48 @@ Route::get('/', function () {
 // }));
 
 // Route::get('/post/{id}', 'PostController@index');
-Route::resource('posts', 'PostController');
+// Route::resource('posts', 'PostController');
 
-Route::get('/contact','PostController@contact');
+// Route::get('/contact','PostController@contact');
 
-Route::get('/about','PostController@about');
+// Route::get('/about','PostController@about');
 
-Route::get('/me', 'PostController@me');
+// Route::get('/me', 'PostController@me');
 
-Route::get('post/{id}/{name}/{pass}','PostController@ShowPost');
-Route::get('postAgain/{id}/{name}/{pass}', 'PostController@ShowPostAgain');
+// Route::get('post/{id}/{name}/{pass}','PostController@ShowPost');
+// Route::get('postAgain/{id}/{name}/{pass}', 'PostController@ShowPostAgain');
+/*
+|----------------------------
+| DATABASE RAW SQL QUERIES
+|----------------------------
+*/
+
+Route::get('/insert',function(){
+
+    DB::insert('insert into posts(title, content) values(?, ?)',['php with laravel','This is cool content']);
+   
+
+});
+
+// Route::get('/read', function(){
+//     $results = DB::select('select * from posts where id = ?', [1]);
+//     var_dump($results);
+//     // foreach($results as $post){
+//     //     return $post->title;
+//     // }
+
+// });
+
+// Route::get('/update', function(){
+
+//     //$updated = DB::update('update posts set title = "updated title" where id =?', [1]);
+//     $updated = DB::update('update posts set title="title Update again" where id=?', [1]);
+
+//     return $updated;
+
+
+// });
+
+Route::get('/delete', function(){
+    DB::delete('delete from posts where id=?',[1]);
+});
