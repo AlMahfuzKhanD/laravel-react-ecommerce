@@ -1,5 +1,7 @@
 <?php
 
+use App\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -60,12 +62,12 @@
 |----------------------------
 */
 
-Route::get('/insert',function(){
+// Route::get('/insert',function(){
 
-    DB::insert('insert into posts(title, content) values(?, ?)',['php with laravel','This is cool content']);
+//     DB::insert('insert into posts(title, content) values(?, ?)',['php with laravel','This is cool content']);
    
 
-});
+// });
 
 // Route::get('/read', function(){
 //     $results = DB::select('select * from posts where id = ?', [1]);
@@ -86,6 +88,58 @@ Route::get('/insert',function(){
 
 // });
 
-Route::get('/delete', function(){
-    DB::delete('delete from posts where id=?',[1]);
+// Route::get('/delete', function(){
+//     DB::delete('delete from posts where id=?',[1]);
+// });
+
+// Route::get('/delete', function(){
+//     $deleted = DB::delete('delete from posts where id=?',[2]);
+//     return $deleted;
+// });
+// Route::get('/insert', function(){
+//     DB::insert('insert into posts(title, content) values(?, ?)',['title','content']);
+// });
+
+// Route::get('/read', function(){
+//     $results = DB::select('select * from posts');
+//     foreach($results as $result){
+//         return $result->title;
+//     }
+// });
+
+/*
+|----------------------------
+| ELEQUENT
+|----------------------------
+*/
+
+// Route::get('/read',function(){
+
+//     $posts = Post::all();
+//     foreach($posts as $post){
+
+//         return $post->title;
+
+//     }
+
+// });
+
+// Route::get('/find', function(){
+//     $post = Post::find(4);
+     
+
+//         return $post->title;
+
+    
+// });
+
+// Route::get('/findwhere', function(){
+//     $posts = Post::where('id',4)->orderBy('id','desc')->take(1)->get();
+//     return $posts;
+// });
+
+Route::get('/findmore', function(){
+    // $posts = Post::findOrFail(3);
+    // return $posts;
+    $posts = Post::where('users_count','<', 50)->firstOrFail();
 });
