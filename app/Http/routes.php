@@ -125,7 +125,7 @@ use App\Post;
 // });
 
 // Route::get('/find', function(){
-//     $post = Post::find(4);
+//     $post = Post::find(5);
      
 
 //         return $post->title;
@@ -138,8 +138,67 @@ use App\Post;
 //     return $posts;
 // });
 
-Route::get('/findmore', function(){
-    // $posts = Post::findOrFail(3);
-    // return $posts;
-    $posts = Post::where('users_count','<', 50)->firstOrFail();
+// Route::get('/findmore', function(){
+//     // $posts = Post::findOrFail(3);
+//     // return $posts;
+//     $posts = Post::where('users_count','<', 50)->firstOrFail();
+// });
+
+// Route::get('/basicinsert', function(){
+//     $post = new Post;
+
+//     $post->title = 'new title';
+//     $post->content = 'new content';
+
+//     $post->save();
+// }); 
+
+// Route::get('/basicinsert4', function(){
+//     $post = Post::find(4);
+
+//     $post->title = 'new title 4';
+//     $post->content = 'new content 4';
+
+//     $post->save();
+// }); 
+
+// Route::get('/create', function(){
+//     Post::create(['title'=>'the create', 'content'=>'I\'am learining a lot with php']);
+// });
+
+// Route::get('/update', function(){
+//     Post::where('id',4)->where('is_admin',0)->update(['title'=>'updated title','content'=>'updated content']);
+// });
+
+// Route::get('/delete', function(){
+//     $post = Post::find(4);
+//     $post->delete();
+// });
+
+// Route::get('/delete2', function(){
+//     Post::destroy([6,7]);
+//     //Post::where('is_admin',0)
+// });
+
+// Route::get('softdeletes', function(){
+//     Post::find(3)->delete();
+// });
+
+// Route::get('readsoftdeletes', function(){
+//     // $post = Post::find(3);
+//     // return $post;
+//     // $post = Post::withTrashed()->where('id',3)->get();
+//     // return $post;
+
+//     $post = Post::onlyTrashed()->where('is_admin',0)->get();
+//     return $post;
+// });
+
+// Route::get('/restore', function(){
+//     Post::withTrashed()->where('is_admin',0)->restore();
+    
+// });
+
+Route::get('/forcedelete', function(){
+    Post::withTrashed()->where('id',3)->forceDelete();
 });
