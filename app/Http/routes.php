@@ -1,6 +1,8 @@
 <?php
 
 use App\Post;
+use App\User;
+use App\Country;
 
 /*
 |--------------------------------------------------------------------------
@@ -199,6 +201,61 @@ use App\Post;
     
 // });
 
-Route::get('/forcedelete', function(){
-    Post::withTrashed()->where('id',3)->forceDelete();
+// Route::get('/forcedelete', function(){
+//     Post::withTrashed()->where('id',3)->forceDelete();
+// });
+
+/*
+|----------------------------
+| ELOQUENT relationship
+|----------------------------
+*/
+
+
+// one to one relationship
+// Route::get('/user/{id}/post', function($id){
+//    return User::find($id)->post->title;
+// });
+
+// //inverse relationship
+// Route::get('/post/{id}/user', function($id){
+// return Post::find($id)->user->name;
+// });
+
+// //one to many relationship
+
+// Route::get('/posts', function(){
+//     $user = User::find(1);
+//     foreach($user->posts as $post){
+// echo $post->title . "<br>";
+//     }
+// });
+
+// // many to many relationship
+
+// Route::get('/user/{id}/role', function($id){
+// $user = User::find($id)->roles()->orderBy('id','desc')->get();
+// return $user;
+
+// // foreach($user->roles as $role){
+// //     return $role->name;
+// // }
+// });
+
+// Accessing the intermidiate / pivot table
+
+Route::get('user/pivot', function(){
+    $user= User::find(1);
+
+    foreach($user->roles as $role){
+echo $role->pivot->created_at;
+    }
+
+});
+
+Route::get('/user/country', function(){
+    $country = Country::find(1);
+    foreach($country->posts as $post){
+        return $post->title;
+    }
 });
