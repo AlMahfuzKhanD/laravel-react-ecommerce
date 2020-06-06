@@ -27,7 +27,7 @@ class AddCountryIdColumnToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('counry_id');
+            $table->dropColumn('country_id');
         });
     }
 }

@@ -3,6 +3,7 @@
 use App\Post;
 use App\User;
 use App\Country;
+use App\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -244,18 +245,41 @@ use App\Country;
 
 // Accessing the intermidiate / pivot table
 
-Route::get('user/pivot', function(){
-    $user= User::find(1);
+// Route::get('user/pivot', function(){
+//     $user= User::find(1);
 
-    foreach($user->roles as $role){
-echo $role->pivot->created_at;
-    }
+//     foreach($user->roles as $role){
+// echo $role->pivot->created_at;
+//     }
 
-});
+// });
 
-Route::get('/user/country', function(){
-    $country = Country::find(1);
-    foreach($country->posts as $post){
-        return $post->title;
-    }
+// Route::get('/user/country', function(){
+//     $country = Country::find(1);
+//     foreach($country->posts as $post){
+//         return $post->title;
+//     }
+// });
+
+// polymorphic relationship
+
+// Route::get('user/photos', function(){
+// $user = User::find(1);
+
+// foreach ($user->photos as $photo) {
+//     return $photo->path;
+// }
+// });
+
+// Route::get('post/photos', function(){
+// $post = Post::find(1);
+
+// foreach ($post->photos as $photo) {
+//     echo $photo->path . "<br>";
+// }
+// });
+
+Route::get('photo/{id}/post', function($id){
+   $photo = Photo::findOrFail($id);
+   return $photo->imageable;
 });
