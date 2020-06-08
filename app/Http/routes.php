@@ -287,20 +287,43 @@ use App\Tag;
 
 //polymorphic many to many
 
-Route::get('/post/{id}/tag', function($id){
-    $post = Post::find($id);
+// Route::get('/post/{id}/tag', function($id){
+//     $post = Post::find($id);
 
-    foreach($post->tags as $tag){
-        echo $tag->name;
-    }
+//     foreach($post->tags as $tag){
+//         echo $tag->name;
+//     }
+// });
+
+// Route::get('tag/{id}/post', function($id){
+//     $tag = Tag::findOrFail($id);
+//     foreach ($tag->posts as $post) {
+//         echo $post->title;
+//     }
+
+//     //return $tag;
+// });
+
+/*
+|----------------------------
+| ELOQUENT relationship again
+|----------------------------
+*/
+
+/********* one to one relationship */
+
+Route::get('/user/{id}/post', function($id){
+    
+    //$post = Post::find($id);
+
+    return User::find($id)->post->title;
 });
 
-Route::get('tag/{id}/post', function($id){
-    $tag = Tag::findOrFail($id);
-    foreach ($tag->posts as $post) {
-        echo $post->title;
-    }
 
-    //return $tag;
+// one to one inverse
+
+Route::get('post/{id}/user', function($id){
+    return Post::find($id)->user->name;
 });
+
 
